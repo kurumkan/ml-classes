@@ -16,7 +16,12 @@ def numpyTesting():
 def plotTesting():
     vec1 = np.array([1, 2, 3, 4, 5])
     vec2 = np.array([4, 5, 3, 7, 6])
-    plt.plot(vec1, vec2)
+
+    # draw as lines
+    # plt.plot(vec1, vec2)
+
+    # draw as points
+    plt.plot(vec1, vec2, 'b.')
     plt.show()
 
 def main():
