@@ -1,12 +1,20 @@
 import pandas as pd
 
 def predictRow(sl, sw, pl, pw):
-    if pl > 4.9:
-        return "virginica"
-    elif pw < 1:
+    # new solution
+    if pl < 2.1:
         return "setosa"
-    else:
+    if pl < 4.8:
         return "versicolor"
+    return "virginica"
+
+    # old solution
+    # if pl > 4.9:
+    #     return "virginica"
+    # elif pw < 1:
+    #     return "setosa"
+    # else:
+    #     return "versicolor"
 
 def calculate():
     df = pd.read_csv('iris.csv')
