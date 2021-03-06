@@ -1,4 +1,4 @@
-# Naive Bayes implementation
+# Decision tree classifier implementation
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -38,7 +38,7 @@ def calculate():
     plt.plot(ccp_alphas, impurities)
     plt.xlabel("effective alpha")
     plt.ylabel("")
-    plt.show()
+    # plt.show()
     clfs = []
     for ccp_alpha in ccp_alphas:
         dtc = DecisionTreeClassifier(random_state=0, ccp_alpha=ccp_alpha)
@@ -51,7 +51,7 @@ def calculate():
     plt.plot(ccp_alphas[:-1], acc_scores[:-1])
     plt.xlabel("effective alpha")
     plt.ylabel("Accuracy scores")
-    plt.show()
+    # plt.show()
 
 def main():
     calculate()
