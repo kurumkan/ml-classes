@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.metrics import plot_confusion_matrix
+from sklearn import metrics
 
 def compareK():
     df = pd.read_csv('iris.csv')
@@ -20,18 +21,19 @@ def compareK():
     # confusion matrix - we can see only 1 mistake has been done
     # it was predicted that virginica but actually it was versicolor
 
-    best_k = 0
-    max_score = -1
-    for k in range(3, 50, 2):
+    scores = []
+    for k in range(1, 50):
         score = getScore(k, train_inputs, train_classes, test_inputs, test_classes)
-        print(score)
-        if score > max_score:
-            max_score = score
-            best_k = k
+        scores.append(score)
 
-    print("Best value of k = " + str(best_k))
-    print("Best score = " + str(max_score))
-
+    plt.figure(figsize=(10, 6))
+    plt.plot(range(1, 50), scores, color='blue', linestyle='dashed',
+             marker='o', markerfacecolor='red', markersize=10)
+    plt.title('accuracy vs. K Value')
+    plt.xlabel('K')
+    plt.ylabel('Accuracy')
+    plt.show()
+    print("Maximum accuracy:-", max(scores), "at K =", scores.index(max(scores)) + 1)
 
 # predicting
 def getScore(k, train_inputs, train_classes, test_inputs, test_classes):
