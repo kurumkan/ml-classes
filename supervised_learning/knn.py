@@ -4,11 +4,10 @@
 import pandas as pd
 import numpy as np
 
-K = 5
 # get shuffled data
 train_data, test_data = np.array_split(pd.read_csv('./iris.csv').sample(frac=1).reset_index(drop=True), 2)
 
-def predictRow(sl_test, sw_test, pl_test, pw_test):
+def predictRow(sl_test, sw_test, pl_test, pw_test, k):
     # generate array of distances
     # sort up
     # get first k elements of sorted distances array
@@ -28,11 +27,13 @@ def predictRow(sl_test, sw_test, pl_test, pw_test):
 
     distances = np.array(distances)
     distances = distances[distances[:, 0].argsort()]
-    first_k = distances[:K]
+    first_k = distances[:k]
     first_k[first_k[:, 1].argsort()]
+    print(first_k)
+    print('-------------------')
     return first_k[0][1]
 
-def calculate():
+def calculate(k):
     points = 0
     for i, row in test_data.iterrows():
         sl = row['sepal.length']
@@ -40,14 +41,15 @@ def calculate():
         pl = row['petal.length']
         pw = row['petal.width']
         species = row['species']
-        prediction = predictRow(sl, sw, pl, pw)
+        prediction = predictRow(sl, sw, pl, pw, k)
         if prediction == species:
             points += 1
-
-    print("accuracy is " + str(points / len(test_data)))
+    print("K = " + str(k) + ", accuracy = " + str(points / len(test_data)))
 
 def main():
-    calculate()
+    # for i in range(1, 10, 2):
+    #     calculate(i)
+    calculate(9)
 
 if __name__=="__main__":
     main()

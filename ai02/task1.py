@@ -1,6 +1,5 @@
 # Decision tree classifier implementation
 import pandas as pd
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -11,10 +10,10 @@ from sklearn.metrics import accuracy_score
 
 def calculate():
     df = pd.read_csv('iris.csv')
-    # df['petal.width'].plot.hist()
-    # plt.show()
-    # sns.pairplot(df, hue='species')
-    # plt.show()
+    df['petal.width'].plot.hist()
+    plt.show()
+    sns.pairplot(df, hue='species')
+    plt.show()
     all_inputs = df[['sepal.length', 'sepal.width', 'petal.length', 'petal.width']].values
     all_classes = df['species'].values
     (train_inputs, test_inputs, train_classes, test_classes) = train_test_split(all_inputs, all_classes, train_size=0.7,                                                                                random_state=1)
@@ -38,7 +37,7 @@ def calculate():
     plt.plot(ccp_alphas, impurities)
     plt.xlabel("effective alpha")
     plt.ylabel("")
-    # plt.show()
+    plt.show()
     clfs = []
     for ccp_alpha in ccp_alphas:
         dtc = DecisionTreeClassifier(random_state=0, ccp_alpha=ccp_alpha)
@@ -51,7 +50,7 @@ def calculate():
     plt.plot(ccp_alphas[:-1], acc_scores[:-1])
     plt.xlabel("effective alpha")
     plt.ylabel("Accuracy scores")
-    # plt.show()
+    plt.show()
 
 def main():
     calculate()
